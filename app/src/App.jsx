@@ -1,11 +1,12 @@
-import InteractiveMap from "./MusaMap/InteractiveMap.jsx"
+import styles from "./App.module.scss"
+import { MusaMap } from "./MusaMap"
 
 function App() {
 
   return (
-    <>
-    <InteractiveMap/>       
-    </>
+    <div className={styles.appWrapper}>
+      <MusaMap/>
+    </div>
   )
 }
 

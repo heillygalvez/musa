@@ -1,0 +1,9 @@
+.sideBarWrapper {
+    position: absolute;
+    height: calc(min(900px, 70vh));
+    width: calc(min(400px, 40vw));
+    top: 50%;
+    bottom: 50%;
+    background-color: #F5F5F5;
+    border: 1px solid red;
+}

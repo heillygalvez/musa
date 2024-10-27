@@ -1,0 +1,11 @@
+.maplibregl-map {
+    .maplibregl-control-container {
+        display: none;
+        margin: 0;
+    }
+    
+    div:nth-child(3) {
+        display: none;
+    }
+}
+
