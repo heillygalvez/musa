@@ -1,9 +1,21 @@
 .sideBarWrapper {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     height: calc(min(900px, 70vh));
     width: calc(min(400px, 40vw));
-    top: 50%;
-    bottom: 50%;
+    top: calc(50% - calc(min(900px, 70vh)/2));
+    // bottom: 50%;
     background-color: #F5F5F5;
-    border: 1px solid red;
+    border-radius: 0 10px 10px 0;
+
+    .header {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        padding: 0.25em 0.5em;
+        font-size: 2em;
+        font-weight: bold;
+        cursor: pointer;
+    }
 }
