@@ -4,7 +4,7 @@ import "./InteractiveMap.css"
 import useWindowDimensions from '../helpers/useWindowDimensions';
 
 import polygons from "../../mockData/mockFarms.json"
-export function InteractiveMap({lon, lat, z, farm, setFarm}) {
+export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
   const [highlightedFarm, setHighlightedFarm] = useState(null)
   const mapTilerKey = import.meta.env.VITE_MAPTILER_KEY
   const {windowWidth, windowHeight} = useWindowDimensions()
@@ -28,6 +28,15 @@ export function InteractiveMap({lon, lat, z, farm, setFarm}) {
       setHighlightedFarm(feature.properties.id)
     } 
   }
+
+  const handleClick = (e) => {
+    if(e.features?.length) {
+      const feature = e.features[0]._vectorTileFeature
+      setFarmId(feature.properties.id)
+    } else {
+      setFarmId(null)
+    }
+  }
   useEffect(() => {
     if(highlightedFarm) console.log("highlightedFarm", highlightedFarm)
   }, [highlightedFarm])
@@ -45,6 +54,7 @@ export function InteractiveMap({lon, lat, z, farm, setFarm}) {
       interactiveLayerIds={["polygon-fill"]}
       onMouseEnter={handleHover}
       onMouseLeave={() => setHighlightedFarm(null)}
+      onClick={handleClick}
     >
       <Source id="polygon-data" type="geojson" data={polygons}>
         <Layer id="polygon-lines" {...lineStyle}/>

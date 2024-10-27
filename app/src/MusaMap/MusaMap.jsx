@@ -1,15 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./MusaMap.module.scss"
 import { InteractiveMap } from './InteractiveMap'
 import { SideBar } from './SideBar'
 
+import { farmInfo } from "../mockData/mockInfo"
+console.log(farmInfo)
 export function MusaMap() {
     const [showSideBar, setShowSideBar] = useState(true)
-    const [selectedFarm, setSelectedFarm] = useState(null)
+    const [selectedFarmId, setSelectedFarmId] = useState(null)
+    const [selectedFarmInfo, setSelectedFarmInfo] = useState(null)
+    const handleClose = () => {
+        setShowSideBar(false)
+        setSelectedFarmId(null)
+    }
+    useEffect(() => {
+        if (farmInfo){
+            setSelectedFarmInfo(farmInfo.find(f => f.id === selectedFarmId))
+            setShowSideBar(true)
+        }
+    }, [selectedFarmId])
+
+    useEffect(() => {
+        console.log("selected", selectedFarmId)
+    }, [selectedFarmId])
+
     return (
         <div className={styles.mapWrapper}>
-            <InteractiveMap lon={-82.5071} lat={9.4523} z={12} farm={selectedFarm} setFarm={setSelectedFarm}/>
-            {showSideBar && <SideBar setShow={setShowSideBar}/>}    
+            <InteractiveMap lon={-82.5071} lat={9.4523} z={12} farmId={selectedFarmId} setFarmId={setSelectedFarmId}/>
+            {selectedFarmInfo && showSideBar && <SideBar closeSideBar={handleClose} selectedFarm={selectedFarmInfo}/>}    
         </div>
     )
 } 
