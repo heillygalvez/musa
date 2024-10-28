@@ -5,7 +5,7 @@ import logo from "../../assets/logo.png"
 export function TitleBar() {
     return <div className={styles.titleWrapper}>
         <div className={styles.bar}>
-            <img alt="musa-logo" src={logo} />
+            <div className={styles.imgContainer}><img alt="musa-logo" src={logo} /></div>
             <span>Musa: Monitoreo y Predicción de Patógenos</span>
         </div>
     </div>

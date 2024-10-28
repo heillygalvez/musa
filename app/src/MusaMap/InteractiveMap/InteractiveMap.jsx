@@ -72,18 +72,20 @@ export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
       }}
       style={{width: windowWidth, height: window.innerHeight}}
       mapStyle={`https://api.maptiler.com/maps/satellite/style.json?key=${mapTilerKey}`}
-      interactiveLayerIds={farmId ? ["selected-fill"]: ["polygon-fill", "hovered-fill","polygon-lines"]}
+      interactiveLayerIds={["polygon-fill", "hovered-fill","polygon-lines"]}
       onMouseMove={handleHover}
       onMouseLeave={handleLeave}
       onClick={handleClick}
     >
-      <Source id="polygon-data" type="geojson" data={polygons}>
-        <Layer id="polygon-lines" {...lineStyle}/>
-        <Layer id="polygon-fill" {...fillStyle}/>
-      </Source>
-      <Source id="hover-data" type="geojson" data={hoveredLayerData}>
-        <Layer id="hover-fill" {...hoverStyle}/>
-      </Source>
+      {!farmId && <>
+        <Source id="polygon-data" type="geojson" data={polygons}>
+          <Layer id="polygon-lines" {...lineStyle}/>
+          <Layer id="polygon-fill" {...fillStyle}/>
+        </Source>
+        <Source id="hover-data" type="geojson" data={hoveredLayerData}>
+          <Layer id="hover-fill" {...hoverStyle}/>
+        </Source>
+      </>}
       <Source id="selected-data" type="geojson" data={selectedLayerData}>
         <Layer id="selected-fill" {...lineStyle}/>
       </Source>
