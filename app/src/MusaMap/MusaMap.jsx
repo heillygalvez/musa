@@ -4,7 +4,7 @@ import { InteractiveMap } from './InteractiveMap'
 import { SideBar } from './SideBar'
 
 import { farmInfo } from "../mockData/mockInfo"
-console.log(farmInfo)
+
 export function MusaMap() {
     const [showSideBar, setShowSideBar] = useState(true)
     const [selectedFarmId, setSelectedFarmId] = useState(null)
@@ -18,10 +18,6 @@ export function MusaMap() {
             setSelectedFarmInfo(farmInfo.find(f => f.id === selectedFarmId))
             setShowSideBar(true)
         }
-    }, [selectedFarmId])
-
-    useEffect(() => {
-        console.log("selected", selectedFarmId)
     }, [selectedFarmId])
 
     return (

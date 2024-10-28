@@ -4,8 +4,10 @@ import "./InteractiveMap.css"
 import useWindowDimensions from '../helpers/useWindowDimensions';
 
 import polygons from "../../mockData/mockFarms.json"
+
 export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
   const [highlightedFarm, setHighlightedFarm] = useState(null)
+  const [selectedLayerData, setSelectedLayerData] = useState({})
   const mapTilerKey = import.meta.env.VITE_MAPTILER_KEY
   const {windowWidth, windowHeight} = useWindowDimensions()
   const lineStyle = {
@@ -21,12 +23,24 @@ export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
       'fill-color': 'transparent',
     }
   }
+  const selectionStyle = {
+    type: "fill",
+    paint: {
+      'fill-color': '#b5e670',
+    }
+  }
   
   const handleHover = (e) => {
     if(e.features?.length) {
       const feature = e.features[0]._vectorTileFeature
       setHighlightedFarm(feature.properties.id)
-    } 
+      e.target.getCanvas().style.cursor = "pointer"
+    }
+  }
+
+  const handleLeave = (e) => {
+    setHighlightedFarm(null)
+    e.target.getCanvas().style.cursor = ""
   }
 
   const handleClick = (e) => {
@@ -37,10 +51,10 @@ export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
       setFarmId(null)
     }
   }
-  useEffect(() => {
-    if(highlightedFarm) console.log("highlightedFarm", highlightedFarm)
-  }, [highlightedFarm])
 
+  useEffect(() => {
+    setSelectedLayerData({...polygons, features: polygons.features.filter(f => f.properties.id === farmId)})
+  }, [farmId])
 
   return (
     <Map
@@ -53,12 +67,15 @@ export function InteractiveMap({lon, lat, z, farmId, setFarmId}) {
       mapStyle={`https://api.maptiler.com/maps/satellite/style.json?key=${mapTilerKey}`}
       interactiveLayerIds={["polygon-fill"]}
       onMouseEnter={handleHover}
-      onMouseLeave={() => setHighlightedFarm(null)}
+      onMouseLeave={handleLeave}
       onClick={handleClick}
     >
       <Source id="polygon-data" type="geojson" data={polygons}>
         <Layer id="polygon-lines" {...lineStyle}/>
         <Layer id="polygon-fill" {...fillStyle}/>
+      </Source>
+      <Source id="farm-data" type="geojson" data={selectedLayerData}>
+        <Layer id="fill-fill" {...selectionStyle}/>
       </Source>
     </Map>
   );
