@@ -22,7 +22,7 @@ export function MusaMap() {
 
     return (
         <div className={styles.mapWrapper}>
-            <InteractiveMap lon={-82.5071} lat={9.4523} z={12} farmId={selectedFarmId} setFarmId={setSelectedFarmId}/>
+            <InteractiveMap lon={-82.5071} lat={9.4523} z={13} farmId={selectedFarmId} setFarmId={setSelectedFarmId}/>
             {selectedFarmInfo && showSideBar && <SideBar closeSideBar={handleClose} selectedFarm={selectedFarmInfo}/>}    
         </div>
     )

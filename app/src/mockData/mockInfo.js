@@ -2,7 +2,7 @@ export const farmInfo = [
     {
         id: "01",
         type: "Banano",
-        size: 1.01,
+        size: 4.604,
         yellow: 0.18,
         status: "Saludable",
         risk: 0.86,
@@ -10,7 +10,7 @@ export const farmInfo = [
     {
         id: "02",
         type: "Banano",
-        size: 0.89,
+        size: 3.205,
         yellow: 0.23,
         status: "Fusarium",
         risk: 1,
@@ -18,7 +18,7 @@ export const farmInfo = [
     {
         id: "03",
         type: "Banano",
-        size: 1.01,
+        size: 3.072,
         yellow: 0.18,
         status: "Saludable",
         risk: 0.86,
@@ -26,7 +26,7 @@ export const farmInfo = [
     {
         id: "04",
         type: "Plátano",
-        size: 0.89,
+        size: 0.506,
         yellow: 0.23,
         status: "Fusarium",
         risk: 1,
@@ -34,7 +34,7 @@ export const farmInfo = [
     {
         id: "05",
         type: "Banano",
-        size: 1.01,
+        size: 3.941,
         yellow: 0.18,
         status: "Saludable",
         risk: 0.86,
@@ -42,7 +42,7 @@ export const farmInfo = [
     {
         id: "06",
         type: "Plátano",
-        size: 0.89,
+        size: 0.473,
         yellow: 0.23,
         status: "Fusarium",
         risk: 1,
